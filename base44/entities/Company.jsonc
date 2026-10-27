@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "name": "Company",
+  "description": "Perusahaan yang dikelola (maks 5)",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nama perusahaan"
+    },
+    "color": {
+      "type": "string",
+      "description": "Warna identitas perusahaan (hex)"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

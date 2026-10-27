@@ -1,0 +1,70 @@
+{
+  "name": "AdBalance",
+  "type": "object",
+  "description": "Saldo Iklan (Ads) \u2014 top up dan pemakaian saldo iklan per platform",
+  "properties": {
+    "company_id": {
+      "type": "string",
+      "description": "ID perusahaan pemilik saldo iklan"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Tanggal transaksi (YYYY-MM-DD)"
+    },
+    "trans_time": {
+      "type": "string",
+      "description": "Jam transaksi (HH:MM) untuk urutan tampil"
+    },
+    "platform": {
+      "type": "string",
+      "description": "Platform iklan: Meta, TikTok, Google, Shopee, dll"
+    },
+    "direction": {
+      "type": "string",
+      "description": "masuk = top up saldo, keluar = pemakaian saldo iklan",
+      "enum": [
+        "masuk",
+        "keluar"
+      ]
+    },
+    "amount": {
+      "type": "number",
+      "description": "Nominal (selalu positif)"
+    },
+    "media": {
+      "type": "string",
+      "description": "Media (mis. MARKETING, AFFILIATE, KOL)"
+    },
+    "card": {
+      "type": "string",
+      "description": "Kartu/sumber dana (mis. dari nama sheet impor Rincian Mutasi)"
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "ID Kode Biaya"
+    },
+    "parent_name": {
+      "type": "string",
+      "description": "Nama Kode Biaya (denormalisasi)"
+    },
+    "category_id": {
+      "type": "string",
+      "description": "ID Sub Biaya"
+    },
+    "category_name": {
+      "type": "string",
+      "description": "Nama Sub Biaya (denormalisasi)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Keterangan transaksi"
+    }
+  },
+  "required": [
+    "company_id",
+    "date",
+    "direction",
+    "amount"
+  ]
+}

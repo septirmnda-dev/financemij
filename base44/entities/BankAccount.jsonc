@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "name": "BankAccount",
+  "description": "Rekening bank per perusahaan",
+  "properties": {
+    "company_id": {
+      "type": "string",
+      "description": "ID perusahaan pemilik rekening"
+    },
+    "bank_name": {
+      "type": "string",
+      "description": "Nama bank (BCA, Mandiri, BNI, BRI, dll)"
+    },
+    "account_number": {
+      "type": "string",
+      "description": "Nomor rekening"
+    },
+    "account_name": {
+      "type": "string",
+      "description": "Nama pemilik rekening"
+    },
+    "opening_balance": {
+      "type": "number",
+      "description": "Saldo awal rekening",
+      "default": 0
+    }
+  },
+  "required": [
+    "company_id",
+    "bank_name",
+    "account_number"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "name": "Category",
+  "description": "Kategori pencatatan finance (mapping mutasi) \u2014 mendukung hierarki Kode Biaya (parent) & Sub Biaya (child)",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nama kategori"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Arah arus kas",
+      "enum": [
+        "masuk",
+        "keluar"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "Jenis kategori: operasional, hpp, pendapatan, modal, lainnya",
+      "enum": [
+        "operasional",
+        "hpp",
+        "pendapatan",
+        "modal",
+        "lainnya"
+      ]
+    },
+    "company_id": {
+      "type": "string",
+      "description": "ID perusahaan jika kategori khusus per perusahaan (kosong = global)"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Kata kunci untuk auto-mapping: jika ditemukan dalam keterangan mutasi, otomatis dipetakan ke kategori ini"
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "ID kategori induk (Kode Biaya) untuk sub biaya; kosong jika ini adalah Kode Biaya (parent)"
+    }
+  },
+  "required": [
+    "name",
+    "direction",
+    "type"
+  ]
+}

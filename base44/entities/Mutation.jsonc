@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "name": "Mutation",
+  "description": "Baris mutasi rekening bank (dari impor CSV/Excel)",
+  "properties": {
+    "bank_account_id": {
+      "type": "string",
+      "description": "ID rekening bank"
+    },
+    "company_id": {
+      "type": "string",
+      "description": "ID perusahaan (denormalisasi untuk filter cepat)"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Tanggal transaksi (YYYY-MM-DD)"
+    },
+    "trans_time": {
+      "type": "string",
+      "description": "Jam transaksi (HH:MM) untuk urutan tampil"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Nominal bertanda: positif = uang masuk, negatif = uang keluar"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Arah mutasi",
+      "enum": [
+        "masuk",
+        "keluar"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Keterangan/deskripsi dari bank"
+    },
+    "balance_after": {
+      "type": "number",
+      "description": "Saldo setelah transaksi (jika tersedia dari bank)"
+    },
+    "mapped": {
+      "type": "boolean",
+      "description": "Sudah dipetakan ke catatan finance atau belum",
+      "default": false
+    },
+    "source_file": {
+      "type": "string",
+      "description": "Nama file sumber impor"
+    }
+  },
+  "required": [
+    "bank_account_id",
+    "company_id",
+    "date",
+    "amount",
+    "direction"
+  ]
+}

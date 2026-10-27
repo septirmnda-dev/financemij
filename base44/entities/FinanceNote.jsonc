@@ -1,0 +1,99 @@
+{
+  "name": "FinanceNote",
+  "type": "object",
+  "description": "Catatan internal finance \u2014 pemetaan mutasi ke Kode Biaya & Sub Biaya (1 mutasi bisa banyak catatan)",
+  "properties": {
+    "mutation_id": {
+      "type": "string",
+      "description": "ID mutasi yang dipetakan"
+    },
+    "bank_account_id": {
+      "type": "string",
+      "description": "ID rekening bank (denormalisasi)"
+    },
+    "company_id": {
+      "type": "string",
+      "description": "ID perusahaan (denormalisasi)"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Tanggal transaksi catatan (sama dengan tanggal mutasi bank)"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Nominal bertanda untuk kategori ini (positif=masuk, negatif=keluar)"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Arah arus kas",
+      "enum": [
+        "masuk",
+        "keluar"
+      ]
+    },
+    "category_id": {
+      "type": "string",
+      "description": "ID Sub Biaya"
+    },
+    "category_name": {
+      "type": "string",
+      "description": "Nama Sub Biaya (denormalisasi)"
+    },
+    "category_type": {
+      "type": "string",
+      "description": "Jenis kategori (denormalisasi): operasional, hpp, pendapatan, modal, lainnya"
+    },
+    "description": {
+      "type": "string",
+      "description": "Keterangan catatan"
+    },
+    "transaction_type": {
+      "type": "string",
+      "description": "Jenis transaksi (uang masuk)"
+    },
+    "media": {
+      "type": "string",
+      "description": "Media pemasaran/pengeluaran (mis. MARKETING, FEE BA, DOMAIN & HOSTING)"
+    },
+    "has_ppn": {
+      "type": "boolean",
+      "description": "Apakah catatan ini mengandung PPN",
+      "default": false
+    },
+    "ppn_amount": {
+      "type": "number",
+      "description": "Nominal PPN jika has_ppn true",
+      "default": 0
+    },
+    "is_ops": {
+      "type": "boolean",
+      "description": "Ditandai masuk ke Operasional (OPS / Plot OPS)",
+      "default": false
+    },
+    "is_plot_ops": {
+      "type": "boolean",
+      "description": "Apakah catatan ini bagian dari plot OPS (sebar ke beberapa bulan)",
+      "default": false
+    },
+    "plot_months": {
+      "type": "number",
+      "description": "Jumlah bulan plot (0 jika bukan plot)",
+      "default": 0
+    },
+    "plot_index": {
+      "type": "number",
+      "description": "Index plot (0-based, bulan ke-n dari plot)",
+      "default": 0
+    }
+  },
+  "required": [
+    "mutation_id",
+    "bank_account_id",
+    "company_id",
+    "date",
+    "amount",
+    "direction",
+    "category_id"
+  ]
+}

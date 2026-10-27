@@ -1,0 +1,25 @@
+{
+  "name": "TransactionType",
+  "type": "object",
+  "description": "Daftar pilihan yang bisa ditambah, diedit, dihapus: Jenis Transaksi, Channel, Media",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nama jenis transaksi, channel, atau media"
+    },
+    "group": {
+      "type": "string",
+      "description": "Kelompok daftar: jenis = Jenis Transaksi, channel = Channel, media = Media",
+      "enum": [
+        "jenis",
+        "channel",
+        "media"
+      ],
+      "default": "jenis"
+    }
+  },
+  "required": [
+    "name",
+    "group"
+  ]
+}

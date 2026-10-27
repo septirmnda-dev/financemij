@@ -1,0 +1,63 @@
+{
+  "name": "PettyCash",
+  "type": "object",
+  "description": "Kas kecil (petty cash) \u2014 pengisian dan pemakaian kas tunai, terhubung ke laporan Operasional",
+  "properties": {
+    "company_id": {
+      "type": "string",
+      "description": "ID perusahaan pemilik kas kecil"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Tanggal transaksi (YYYY-MM-DD)"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Arah kas: masuk = pengisian kas, keluar = pemakaian kas",
+      "enum": [
+        "masuk",
+        "keluar"
+      ]
+    },
+    "amount": {
+      "type": "number",
+      "description": "Nominal kas (selalu positif)"
+    },
+    "source": {
+      "type": "string",
+      "description": "Jenis Uang: Tunai atau nama bank/rekening sumber (mis. BCA MIJ)"
+    },
+    "is_ops": {
+      "type": "boolean",
+      "description": "Ditandai Operasional (ops)",
+      "default": false
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "ID Kode Biaya"
+    },
+    "parent_name": {
+      "type": "string",
+      "description": "Nama Kode Biaya (denormalisasi)"
+    },
+    "category_id": {
+      "type": "string",
+      "description": "ID Sub Biaya"
+    },
+    "category_name": {
+      "type": "string",
+      "description": "Nama Sub Biaya (denormalisasi)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Keterangan transaksi"
+    }
+  },
+  "required": [
+    "company_id",
+    "date",
+    "direction",
+    "amount"
+  ]
+}
