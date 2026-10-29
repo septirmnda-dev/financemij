@@ -52,6 +52,11 @@
     "description": {
       "type": "string",
       "description": "Keterangan transaksi"
+    },
+    "synced_sheets": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Kunci spreadsheet petty cash yang sudah menerima baris ini (lihat src/lib/sheetsConfig.js)"
     }
   },
   "required": [

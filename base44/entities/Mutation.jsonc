@@ -48,6 +48,11 @@
     "source_file": {
       "type": "string",
       "description": "Nama file sumber impor"
+    },
+    "admin_sheet_synced": {
+      "type": "boolean",
+      "description": "Sudah ditulis ke spreadsheet BIAYA ADMIN REK (khusus mutasi biaya admin/pajak)",
+      "default": false
     }
   },
   "required": [

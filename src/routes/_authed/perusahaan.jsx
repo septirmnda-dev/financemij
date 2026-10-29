@@ -65,7 +65,7 @@ function PerusahaanPage() {
   };
 
   const saveBank = async () => {
-    const { id, company_id, bank_name, account_number, account_name, opening_balance } = bankDialog;
+    const { id, company_id, bank_name, account_number, account_name, opening_balance, sheet_name } = bankDialog;
     if (!company_id) { toast.error("Pilih perusahaan"); return; }
     if (!bank_name?.trim()) { toast.error("Nama bank wajib diisi"); return; }
     if (!account_number?.trim()) { toast.error("Nomor rekening wajib diisi"); return; }
@@ -75,6 +75,7 @@ function PerusahaanPage() {
       account_number: account_number.trim(),
       account_name: account_name?.trim() || "",
       opening_balance: Number(opening_balance) || 0,
+      sheet_name: sheet_name?.trim() || "",
     };
     if (id) {
       await base44.entities.BankAccount.update(id, payload);
@@ -184,7 +185,7 @@ function PerusahaanPage() {
                         <p className="text-[11px] text-muted-foreground">{b.account_name || "—"}</p>
                       </div>
                       <div className="flex gap-0.5">
-                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setBankDialog({ id: b.id, company_id: c.id, bank_name: b.bank_name, account_number: b.account_number, account_name: b.account_name, opening_balance: b.opening_balance })}>
+                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setBankDialog({ id: b.id, company_id: c.id, bank_name: b.bank_name, account_number: b.account_number, account_name: b.account_name, opening_balance: b.opening_balance, sheet_name: b.sheet_name })}>
                           <Pencil className="h-3 w-3" />
                         </Button>
                         <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => deleteBank(b)}>
@@ -259,6 +260,11 @@ function PerusahaanPage() {
             <div>
               <Label>Saldo Awal</Label>
               <Input type="number" value={bankDialog?.opening_balance || 0} onChange={(e) => setBankDialog({ ...bankDialog, opening_balance: e.target.value })} />
+            </div>
+            <div>
+              <Label>Nama Tab Spreadsheet (opsional)</Label>
+              <Input value={bankDialog?.sheet_name || ""} onChange={(e) => setBankDialog({ ...bankDialog, sheet_name: e.target.value })} placeholder="Otomatis: 164-5678666 / nomor rekening" />
+              <p className="mt-1 text-[11px] text-muted-foreground">Tab di ALL MUTASI REKENING, mis. &quot;BCA Farid&quot;. Kosongkan bila nama tab = nomor rekening.</p>
             </div>
           </div>
           <DialogFooter>

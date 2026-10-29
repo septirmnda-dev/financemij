@@ -1,0 +1,7 @@
+{
+  // Akun Google bersama untuk sinkron data web → spreadsheet yang sudah ada
+  // (ALL MUTASI REKENING, PETTY CASH, BIAYA ADMIN REK). Akun yang dihubungkan
+  // harus punya akses Editor ke spreadsheet-spreadsheet tersebut.
+  "type": "googlesheets",
+  "scopes": ["https://www.googleapis.com/auth/spreadsheets"]
+}
