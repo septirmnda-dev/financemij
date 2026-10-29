@@ -23,6 +23,10 @@
       "type": "number",
       "description": "Saldo awal rekening",
       "default": 0
+    },
+    "sheet_name": {
+      "type": "string",
+      "description": "Nama tab di spreadsheet ALL MUTASI REKENING (kosongkan untuk otomatis dari nomor rekening, mis. 164-5678666)"
     }
   },
   "required": [

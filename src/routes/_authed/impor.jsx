@@ -158,6 +158,7 @@ function ImporPage() {
     let totalImported = 0;
     let totalMapped = 0;
     let totalSkipped = 0;
+    const sheetErrors = [];
     try {
       for (const f of readyFiles) {
         const bank = (banks || []).find((b) => b.id === f.bankId);
@@ -182,10 +183,19 @@ function ImporPage() {
         totalImported += result.total;
         totalMapped += result.auto_mapped;
         totalSkipped += result.skipped || 0;
+        sheetErrors.push(...(result.sheet?.errors || []));
+        if (result.sheet?.daily?.missing?.length) {
+          sheetErrors.push(`${f.file.name}: tanggal ${result.sheet.daily.missing.join(", ")} tidak ada di tab ${result.sheet.daily.tab}`);
+        }
       }
       toast.success(
         `${totalImported} mutasi diimpor${totalSkipped > 0 ? `, ${totalSkipped} duplikat dilewati` : ""} — ${totalMapped} dipetakan otomatis`
       );
+      if (sheetErrors.length > 0) {
+        toast.warning(`Spreadsheet belum terupdate: ${sheetErrors.join("; ")}`, { duration: 15000 });
+      } else if (totalImported > 0) {
+        toast.success("Spreadsheet ALL MUTASI & Biaya Admin terupdate");
+      }
       setFiles([]);
       navigate({ to: "/mutasi" });
     } catch (e) {

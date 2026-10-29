@@ -15,6 +15,7 @@ import {
   TrendingUp,
   Megaphone,
   Percent,
+  FileSpreadsheet,
   LogOut,
   Menu,
   X,
@@ -43,6 +44,7 @@ const navGroups = [
       { label: "Catatan Finance", path: "/catatan", icon: FileText },
       { label: "Petty Cash", path: "/pettycash", icon: Coins },
       { label: "Saldo Iklan", path: "/saldo-iklan", icon: Megaphone },
+      { label: "Sinkron Spreadsheet", path: "/spreadsheet", icon: FileSpreadsheet },
     ],
   },
   {

@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { requireUser } from "@/lib/auth-middleware";
+import { syncBankAccount } from "@/lib/sheets.server";
 
 export const getServerInfo = createServerFn({ method: "GET" }).handler(async () => ({
   renderedAt: new Date().toISOString(),
@@ -389,6 +391,7 @@ const MutationImportInput = z.object({
 });
 
 export const importMutations = createServerFn({ method: "POST" })
+  .middleware([requireUser])
   .validator(
     z.object({
       bank_account_id: z.string(),
@@ -471,10 +474,22 @@ export const importMutations = createServerFn({ method: "POST" })
       await base44.entities.FinanceNote.bulkCreate(notesToCreate);
     }
 
+    // 3. Update spreadsheet (ALL MUTASI REKENING + BIAYA ADMIN REK); gagal sinkron tidak membatalkan impor
+    let sheet = { errors: [] };
+    if (fresh.length > 0) {
+      try {
+        const freshDates = fresh.map((m) => m.date).sort();
+        sheet = await syncBankAccount(base44, data.bank_account_id, freshDates[0], freshDates[freshDates.length - 1]);
+      } catch (e) {
+        sheet = { errors: [e.message] };
+      }
+    }
+
     return {
       total: createdMutations.length,
       skipped,
       auto_mapped: notesToCreate.length,
       manual: createdMutations.length - notesToCreate.length,
+      sheet,
     };
   });

@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { SearchSelect } from "@/components/SearchSelect";
 import { toast } from "sonner";
+import { syncPettyCashToSheets } from "@/lib/sheet-sync";
 
 function todayLocal() {
   const d = new Date();
@@ -94,6 +95,12 @@ export function PettyCashDialog({ open, onOpenChange, companies = [], categories
     } else {
       await base44.entities.PettyCash.create(payload);
       toast.success("Transaksi kas ditambahkan");
+      syncPettyCashToSheets()
+        .then((r) => {
+          if (r.errors.length > 0) toast.warning(`Spreadsheet petty cash belum terupdate: ${r.errors.join("; ")}`, { duration: 15000 });
+          else if (r.results.length > 0) toast.success(`Spreadsheet terupdate: ${r.results.map((x) => `${x.label} (${x.tab})`).join(", ")}`);
+        })
+        .catch((e) => toast.warning(`Spreadsheet petty cash belum terupdate: ${e.message}`, { duration: 15000 }));
     }
     onOpenChange(false);
     onSaved?.();
